@@ -1,7 +1,8 @@
 '''
 ====================================================================================================
-# P34_00: this method takes in noisy-frame and ss-frame to produce 512-bin magnitude and phase
-    P34_00A: we'll do the frequency shifting thing and use the same 512 bin networks for mimicking those too. 
+# Aim:
+    This method takes in a noisy-frame and spectral-subtracted frame to produce 512-bin magnitude and phase. 
+    This has the frequency-shifting thing too.
 ====================================================================================================
 '''
 # ==================================================================================================
@@ -99,22 +100,6 @@ def butter_highpass_filter(data, cutoff, fs, order, axis):
     b, a = butter_highpass(cutoff, fs, order=order)
     y = scipy.signal.lfilter(b, a, data, axis = axis)
     return y
-# def frequencyshiftleftby4000(currentinput_highpass):
-#     # high-pass shifting
-#     shiftingsignal = np.sin(2*np.pi*(4000/16000)*currentinput_highpass.shape[1]*np.arange(0, currentinput_highpass.shape[1])/currentinput_highpass.shape[1]);
-#     shiftingsignal = np.tile(shiftingsignal[None,:], (currentinput_highpass.shape[0],1))
-#     currentinput_highpass_shifted = np.multiply(currentinput_highpass, shiftingsignal);
-#     currentinput_highpass_shifted_filtered = butter_lowpass_filter(currentinput_highpass_shifted, 4000, 16000, 30, axis = 1);
-
-#     return currentinput_highpass_shifted_filtered
-# def frequencyshiftrightby4000(currentinput_highpass):
-#     # high-pass shifting
-#     shiftingsignal = np.sin(-2*np.pi*(4000/16000)*currentinput_highpass.shape[1]*np.arange(0, currentinput_highpass.shape[1])/currentinput_highpass.shape[1]);
-#     shiftingsignal = np.tile(shiftingsignal[None,:], (currentinput_highpass.shape[0],1))
-#     currentinput_highpass_shifted = np.multiply(currentinput_highpass, shiftingsignal);
-#     currentinput_highpass_shifted_filtered = butter_highpass_filter(currentinput_highpass_shifted, 4000, 16000, 30, axis = 1);
-
-#     return currentinput_highpass_shifted_filtered
 def frequencyshiftleftby4000(currentinput_highpass, order = 11):
     # first high-pass filtering at half
     currentinput_highpass = butter_highpass_filter(currentinput_highpass, 4000, 16000, order, axis = 1);
@@ -150,47 +135,26 @@ def frequencyshiftrightby4000(currentinput_highpass, order = 11):
 #########################################################################################################
 
 
-
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-
-# MDOEL PATHS ###########################################################################################################################################################
-modelname = '/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/model_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
-modelname_phase = '/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/model_phase_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
-modelname_magnitude_frame2 = '/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/model_magnitude_frame2_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
-modelname_phase_frame2 = '/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/model_phase_frame2'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
+# GLOBAL VARIABLES #########################################################################################################
+# MDOEL PATHS ============================================================================================
+modelname = 'model_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
+modelname_phase = 'model_phase_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
+modelname_magnitude_frame2 = 'model_magnitude_frame2_'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
+modelname_phase_frame2 = 'model_phase_frame2'  +  os.path.basename(sys.argv[0])[:-3]  +  '.pth'; 
 
 # tensor amplifications
 tensoramplification = 1;
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
-###########################################################################################################################################################################################################
 
-
-
-
-
-
-
-
-
-
-
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
-# TRAIN ####################################################################################################################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
+# TRAIN #################################################################################################
 def train():
 
     # sending to gpu #################################################
@@ -357,10 +321,10 @@ def train():
             torch.save(phaseencoder_frame2, modelname_phase_frame2);
             
             # Plotting #############################################################################################################        
-
-            # plotting the losses
-            plt.figure(1);
-            plt.clf();
+            # Plotting #############################################################################################################        
+            # Plotting #############################################################################################################        
+            # plotting the losses ==================================================================================================
+            plt.figure(1); plt.clf();
             plt.subplot(1,2,1); plt.plot(losslist, linewidth = 0.5, color = 'red', label = 'frame 1 train loss');
             plt.subplot(1,2,1); plt.plot(baselinelosslist, linewidth = 0.5, color = 'green', label = 'frame 1 baseline loss list');
             plt.subplot(1,2,1); plt.plot(testlosslist,  ':', linewidth = 0.5, color = 'orange', label = 'frame 1 test loss');plt.legend();
@@ -369,9 +333,8 @@ def train():
             plt.subplot(1,2,2); plt.plot(baselinelosslist_frame2, linewidth = 0.5, color = 'green', label = 'frame 2 baselineloss');
             plt.legend(); plt.draw(); plt.pause(0.001);
 
-            # plotting the results
-            plt.figure(2);
-            plt.clf();
+            # plotting the results =================================================================================================
+            plt.figure(2); plt.clf();
             var00 = netoutput[0,:].cpu().detach().numpy();
             var01 = currentoutput[0,:];
             var02 = netoutput_frame2[0,:].cpu().detach().numpy();
@@ -394,27 +357,26 @@ def train():
 # TESTING ###########################################################################################################################################################################
 # TESTING ###########################################################################################################################################################################
 def test():
-    # sending the data to the GPU ////////////////////////
+    # ==================================================
     if torch.backends.mps.is_available(): device = 'mps'
     else: device = 'cpu'
     device = 'cpu'
 
-    # loading the two models ######################
+    # loading the two models ===================================================
     autoencoder = torch.load(modelname).to(device);
     phaseencoder = torch.load(modelname_phase).to(device);
     magnitudeencoder_frame2 = torch.load(modelname_magnitude_frame2).to(device);
     phaseencoder_frame2 = torch.load(modelname_phase_frame2).to(device);
 
-    # loading data ###########################################################################################
-    inputdatatitle = '/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/test.mat'
+    # loading data ============================================================================================================================================
+    inputdatatitle = 'test.mat' # !!!!!!!!!!!!!!!!!!!!!!!!!!!!! change this to the path where the test script saves the processed file. 
     inputmat = scipy.io.loadmat(inputdatatitle); 
     currentinput = inputmat['speechnoisemixframes']; currentinput = torch.from_numpy(currentinput).float(); currentinput = torch.transpose(currentinput, 0, 1);
     ssinput = inputmat["SS_frames"]; ssinput = torch.from_numpy(ssinput).float(); ssinput = torch.transpose(ssinput, 0, 1);
 
-    # running the data through the neural net ##################################
+    # running the data through the neural net ==========================================================
     currentinput_shifted = torch.from_numpy(frequencyshiftleftby4000(currentinput, order = 11)).float();
     ssinput_shifted = torch.from_numpy(frequencyshiftleftby4000(ssinput, order = 11)).float();
-
     netoutput = autoencoder(currentinput, ssinput);
     phaseoutput = phaseencoder(currentinput, ssinput);
     netoutput_magnitude_frame2 = magnitudeencoder_frame2(currentinput_shifted, ssinput_shifted);
@@ -440,8 +402,8 @@ def test():
     # shifting the output and adding them together ===================================================
     netoutput = netoutput + torch.from_numpy(frequencyshiftrightby4000(netoutput_frame2.detach().numpy(), order = 11));
 
-    # converting and saving results.########################################################################################################
-    scipy.io.savemat('/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/PythonFiles/DenoisingArtifacts/Models/testresults.mat', {"netoutput":netoutput.cpu().detach().numpy()});
+    # converting and saving results ===========================================================================================================================================
+    scipy.io.savemat('testresults.mat', {"netoutput":netoutput.cpu().detach().numpy()});
 
 # MAIN ################################################################################
 # MAIN ################################################################################
