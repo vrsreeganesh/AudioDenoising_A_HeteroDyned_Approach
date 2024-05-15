@@ -3,7 +3,7 @@
 ![alt text](Miscellaneous/Plot_2.png)
 
 <div style="display:flex;">
-    <img src="Miscellaneous/Plot_1.png" alt="Figure 1" style="width:45%;">
+    <img src="Miscellaneous/Plot_1.png" alt="Figure 1" style="width:35%;">
     <img src="Miscellaneous/Plot_2.png" alt="Figure 2" style="width:45%;">
 </div>
 
