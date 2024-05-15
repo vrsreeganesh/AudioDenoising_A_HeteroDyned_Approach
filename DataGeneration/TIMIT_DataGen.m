@@ -19,8 +19,7 @@ wavFiles = wavFiles(reorderorder,:);
 
 % replace this to the paths containing the noise-files you want to create dataset from
 noiseFiles = ["/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/Matlab/Data/cafe_noise.m4a",...
-              "/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/Matlab/Data/engine_noise.wav", ...
-              "/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/Matlab/Data/rain_noise.wav"];
+              "/Users/vrsreeganesh/Desktop/BUClasses/Thesis/Code/Matlab/Data/engine_noise.wav"];
 
 %% Building Dataset
 for wavfileindex = 1:length(wavFiles)
