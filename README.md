@@ -14,6 +14,16 @@ To create the dataset for this task,
 2. In the file DataGeneration/TIMIT_DataGen and DataGeneration/T26_Saving_RawFrame_SSFrame_CleanSpeechFrame, change the indicated paths and run file DataGeneration/TIMIT_DataGen. This file will go through the TIMIT data base, create Noisy-frames at different SNRs and save the noisy-frame, spectral-subtracted frame and clean-speech frame, to the path you specified, as matfiles.
 
 ## Training
+Once the dataset has been created, train the Frame-To-Frame Model in the following manner
+```
+cd FrameToFrame
+python FrameToFrameTraining.py
+```
+Similarly, train the Frame-To-DFT model in the following manner
+```
+cd FrameToDFT
+python FrameToFrameTraining.py
+```
 
 ## Evaluation
 
