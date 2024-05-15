@@ -25,5 +25,9 @@ cd FrameToDFT
 python FrameToFrameTraining.py
 ```
 
-## Evaluation
+## Inference
+To run the Frame-To-Frame model, run the MATLAB code titled, "Inference_FrameToFrame", in FrameToFrame directory.
+To run the Frame-To-DFT model, run the MATLAB code titled, "Inference_FrameToDFT" in FrameToDFT directory.
+
+
 
