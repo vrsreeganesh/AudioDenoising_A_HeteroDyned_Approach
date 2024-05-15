@@ -2,7 +2,7 @@
 
 
 <div style="display:flex;">
-    <img src="Miscellaneous/Plot_1.png" alt="Figure 1" style="width:42%;">
+    <img src="Miscellaneous/Plot_1.png" alt="Figure 1" style="width:43%;">
     <img src="Miscellaneous/Plot_2.png" alt="Figure 2" style="width:45%;">
 </div>
 
