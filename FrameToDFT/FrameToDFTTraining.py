@@ -363,10 +363,17 @@ def test():
     device = 'cpu'
 
     # loading the two models ===================================================
+    # the following lines of code loads the model that is trained by you. To run the code the author trained, comment this and uncomment the next code segment
     autoencoder = torch.load(modelname).to(device);
     phaseencoder = torch.load(modelname_phase).to(device);
     magnitudeencoder_frame2 = torch.load(modelname_magnitude_frame2).to(device);
     phaseencoder_frame2 = torch.load(modelname_phase_frame2).to(device);
+
+    # # uncomment the following to run models trained by author 
+    # autoencoder = torch.load("Models/model_P34_00A3_Raw_SS_CleanFFTandPhase_TemporalLoss.pth").to(device);
+    # phaseencoder = torch.load("Models/model_phase_P34_00A3_Raw_SS_CleanFFTandPhase_TemporalLoss.pth").to(device);
+    # magnitudeencoder_frame2 = torch.load("Models/model_magnitude_frame2_P34_00A3_Raw_SS_CleanFFTandPhase_TemporalLoss.pth").to(device);
+    # phaseencoder_frame2 = torch.load("Models/model_phase_frame2P34_00A3_Raw_SS_CleanFFTandPhase_TemporalLoss.pth").to(device);
 
     # loading data ============================================================================================================================================
     inputdatatitle = 'test.mat' # !!!!!!!!!!!!!!!!!!!!!!!!!!!!! change this to the path where the test script saves the processed file. 
